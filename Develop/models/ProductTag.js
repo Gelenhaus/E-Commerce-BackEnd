@@ -1,6 +1,3 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
-
 /*
 product belongs to category
 category may have many products
@@ -14,6 +11,7 @@ and tags to have many products
 
 tag belongs to many product models
 */
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class ProductTag extends Model { }

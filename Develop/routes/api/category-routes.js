@@ -5,7 +5,7 @@ const { Category, Product } = require('../../models');
 // The `/api/categories` endpoint
 router.get('/', (req, res) => {
   Category.findAll({
-    attributes: ['category_name', 'id'], include: [{ model: Product, attributes: ['category_id', 'price', 'stock', 'product_name', 'id'] }]
+    attributes: ['category_name', 'id'], include: [{ model: Product, attributes: ['price', 'stock', 'product_name', 'id'] }]
   }).then(dbData => res.json(dbData)).catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   User.findOne({
-    where: { id: req.params.id }, attributes: ['id', 'category_name'], include: [{ model: Product, attributes: ['product_name', 'category_id', 'price', 'stock', 'id'] }]
+    where: { id: req.params.id }, attributes: ['id', 'category_name'], include: [{ model: Product, attributes: ['product_name', 'price', 'stock', 'id'] }]
   })
     .then(dbData => {
       if (!dbData) {
@@ -29,6 +29,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
+//do i need to have id: req.body.id?
 router.post('/', (req, res) => {
   // create a new category
   Category.create({
@@ -38,6 +39,7 @@ router.post('/', (req, res) => {
     .then(dbData => res.json(dbData)).catch(err => { console.log(err); res.status(500).json(err) });
 });
 
+//do i need category_name: req.body.category_name?
 router.put('/:id', (req, res) => {
   Category.update(req.body, {
     category_name: req.body.category_name,
