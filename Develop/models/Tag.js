@@ -7,6 +7,8 @@ class Tag extends Model { }
 Tag.init(
   {
     // define columns
+    //allow null = must have a value, primary key = the column that uniquely identifies rows
+    // think a license plate
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
