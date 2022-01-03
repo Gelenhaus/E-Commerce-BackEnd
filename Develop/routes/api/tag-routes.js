@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
   });
 });
 
-
 // find a single tag by its `id`
 // be sure to include its associated Product data
 
