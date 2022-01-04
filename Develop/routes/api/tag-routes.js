@@ -48,24 +48,22 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
-  Tag.update({
-    tag_name: req.body.tag_name
-  }, {
+  Tag.update(req.body, {
     where: {
       id: req.params.id
-    }.then(dbData => {
-      if (!dbData) {
-        res.status(404).json({ message: 'Invalid Tag ID' });
-        return;
-      }
-      res.json(dbData);
-    })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      })
+    }
   }
-  )
+  ).then(dbData => {
+    if (!dbData) {
+      res.status(404).json({ message: 'Invalid Tag ID' });
+      return;
+    }
+    res.json(dbData);
+  })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.delete('/:id', (req, res) => {
